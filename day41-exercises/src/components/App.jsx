@@ -32,6 +32,11 @@ class App extends React.PureComponent {
     return (
       <div className="App">
         <Button
+          text={
+            this.state.showBookAlreadyRead
+              ? "Show books I need to read"
+              : "Show books I have already read"
+          }
           onClick={() =>
             this.setState({
               showBookAlreadyRead: !this.state.showBookAlreadyRead,
@@ -39,9 +44,17 @@ class App extends React.PureComponent {
           }
         />
         {booksToShow.map((book, index) =>
-          this.state.showBookAlreadyRead
-            ? `I have already read ${book.title} by ${book.author}! `
-            : `I still need to read ${book.title} by ${book.author}! `
+          this.state.showBookAlreadyRead ? (
+            <Text
+              text={`I have already read ${book.title} by ${book.author}! `}
+              number={3}
+            />
+          ) : (
+            <Text
+              text={`I still need to read ${book.title} by ${book.author}! `}
+              number={3}
+            />
+          )
         )}
       </div>
     );
