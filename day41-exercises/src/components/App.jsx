@@ -4,18 +4,45 @@ import Text from "./Text";
 
 class App extends React.PureComponent {
   state = {
-    showText: false,
-    alertSomething: "something",
+    showBookAlreadyRead: false,
   };
   render() {
+    const books = [
+      {
+        title: "The Hobbit",
+        author: "J.R.R. Tolkien",
+        alreadyRead: true,
+        id: 1,
+      },
+      {
+        title: "The Lord of the Rings",
+        author: "J.R.R. Tolkien",
+        alreadyRead: false,
+      },
+      {
+        title: "Einstein",
+        author: "Walter Isaacson",
+        alreadyRead: false,
+      },
+    ];
+
+    const booksToShow = books.filter(
+      (book) => book.alreadyRead === this.state.showBookAlreadyRead
+    );
     return (
       <div className="App">
         <Button
-          onClick={() => this.setState({ showText: !this.state.showText })}
+          onClick={() =>
+            this.setState({
+              showBookAlreadyRead: !this.state.showBookAlreadyRead,
+            })
+          }
         />
-        <Button onClick={() => this.setState({ alertSomething: "anything" })} />
-        {this.state.showText && <Text />}
-        {console.log(this.state.alertSomething)}
+        {booksToShow.map((book, index) =>
+          this.state.showBookAlreadyRead
+            ? `I have already read ${book.title} by ${book.author}! `
+            : `I still need to read ${book.title} by ${book.author}! `
+        )}
       </div>
     );
   }
