@@ -13,7 +13,6 @@ class App extends React.Component {
         <Search />
         <div id="main">
           <div className="content">
-            <h1>Products</h1>
 
             <ProductList />
           </div>
